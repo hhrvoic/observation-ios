@@ -38,6 +38,6 @@ DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(2)) {
     var song = HardcodedSongs.ironMaiden[1]
     song.name = "Run to the hills"
     var notification = Notification(name: notificationName)
-    notification.userInfo = ["song": song, "action": Action.create]
+    notification.userInfo = ["song": song, "action": Action.update]
     NotificationCenter.default.post(notification)
 }
