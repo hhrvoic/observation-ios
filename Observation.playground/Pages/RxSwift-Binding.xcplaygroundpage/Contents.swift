@@ -9,21 +9,21 @@ import UIKit
 import RxCocoa
 
 public class SongListViewControllerRxBinding: SongListViewController {
-    let songStore = SongStore.shared
-    private let _disposeBag = DisposeBag()
+    private let songStore = SongStore.shared
+    private let disposeBag = DisposeBag()
 
     override public func viewDidLoad() {
         super.viewDidLoad()
-        tableView.dataSource = nil // We will define datasource down below, in reactive way, by binding to tableView.rx.items
+        tableView.dataSource = nil // Datasource is defined in code below by binding to tableView.rx.items (reactive way)
 
-        songStore.songs
-            .bind(to: tableView.rx.items) {
-                (tableView, row, item) in
-                let cell = tableView.dequeueReusableCell(withIdentifier: songCellReuseId) ?? UITableViewCell(style: .subtitle, reuseIdentifier: songCellReuseId)
+        songStore
+            .songs
+            .bind(to: tableView.rx.items) { [unowned self] (_, _, item) in // Closure for returning cell that is updated with song item
+                let cell = self.instantiateCell()
                 cell.configure(with: item)
                 return cell
         }
-        .disposed(by: _disposeBag)
+        .disposed(by: disposeBag)
     }
 }
 

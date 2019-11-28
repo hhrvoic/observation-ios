@@ -2,7 +2,7 @@ import Foundation
 import Combine
 import SwiftUI
 
- // MARK: - With property wrapper -
+ // MARK: - Shorter way: store with @Published property wrapper -
 
 public class SongStore: ObservableObject {
 
@@ -18,7 +18,7 @@ extension SongStore {
     }
 }
 
-// MARK: - Without property wrapper (manually using objectWillChange publisher) -
+// MARK: - Longer way: store without property wrapper (using objectWillChange publisher) -
 
 //public class SongStore: ObservableObject {
 //

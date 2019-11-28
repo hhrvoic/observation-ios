@@ -8,8 +8,8 @@ import UIKit
 import PlaygroundSupport
 
 public class SongListViewControllerCO: SongListViewController {
-    let subject = Subject.shared
-    var datasource: [Song] = HardcodedSongs.ironMaiden
+    private let subject = Subject.shared
+    private var datasource: [Song] = HardcodedSongs.ironMaiden
 
     deinit {
         print("SongListViewController: released from VC stack")

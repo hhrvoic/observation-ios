@@ -9,7 +9,7 @@ import UIKit
 
 public class SongListViewControllerRxBasic: SongListViewController {
     let subject = Subject.shared
-    private let _disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
 
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +20,7 @@ public class SongListViewControllerRxBasic: SongListViewController {
             .subscribe(onNext: { [weak self] (song, action) in
                 self?.didUpdate(song: song, action: action)
             })
-            .disposed(by: _disposeBag)
+            .disposed(by: disposeBag)
     }
 }
 

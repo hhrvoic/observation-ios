@@ -22,7 +22,7 @@ struct SongListRow: View {
 }
 
 struct SongList: View {
-    @EnvironmentObject private var songStore: SongStore // Whenever this object changes (when song array changes) this view will re-render it's body
+    @EnvironmentObject private var songStore: SongStore // Whenever this object changes (when song array changes) view will re-render it's body
 
     var body: some View {
          List {
@@ -44,4 +44,3 @@ DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(2)) {
     songs[1].name = "Run to the hills"
     store.didUpdate(songs: songs)
 }
-

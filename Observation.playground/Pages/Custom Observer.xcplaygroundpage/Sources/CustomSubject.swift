@@ -10,7 +10,8 @@ public protocol SongObserver: Observer {
     func didUpdate(song: Song, action: Action)
 }
 
-// Wrapper class that will hold the weak value of subscribers, else VCs are gonna be retained since they will be stored inside singleton object (that is alive through whole application lifecycle)
+/// Wrapper class that will hold the weak value of subscribers else VCs are gonna be retained
+/// since they will be stored inside array that lives in Subject singleton object (that is alive through whole application lifecycle)
 public class WeakObserver {
     weak var value: Observer?
     var types: Set<ObservedType>
@@ -37,10 +38,10 @@ public class Subject: SubjectProtocol {
     private var observers: [WeakObserver] = []
 
     public func subscribe(_ observer: Observer, for types: ObservedType...) {
-        let index = observers.firstIndex(where: { $0.value === observer })
+        let existingObserverIndex = observers.firstIndex(where: { $0.value === observer })
 
-        if let _index = index {
-            types.forEach({ observers[_index].types.insert($0) })
+        if let index = existingObserverIndex {
+            types.forEach({ observers[index].types.insert($0) })
         } else {
             observers.append(WeakObserver(value: observer, subscribedFor: types))
         }
@@ -68,10 +69,10 @@ public class Subject: SubjectProtocol {
 extension Subject {
     public func publish(_ action: Action, of song: Song) {
         observers
-            .filter{ $0.types.contains(.song) }
+            .filter { $0.types.contains(.song) }
             .forEach { (observer) in
                 guard let songObserver = observer.value as? SongObserver else { return }
                 songObserver.didUpdate(song: song, action: action)
-        }
+            }
     }
 }

@@ -3,8 +3,6 @@ import Foundation
 import NotificationCenter
 import PlaygroundSupport
 
-public let songCellReuseId = "SongCell"
-
 extension UITableViewCell {
 
     public func configure(with item: Song) {
@@ -15,6 +13,7 @@ extension UITableViewCell {
 
 open class SongListViewController: UITableViewController {
 
+    private let songCellReuseId = "SongCell"
     private var datasource = HardcodedSongs.ironMaiden
 
     override open func viewDidLoad() {
@@ -27,8 +26,7 @@ open class SongListViewController: UITableViewController {
     }
 
     override open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        let cell = tableView.dequeueReusableCell(withIdentifier: songCellReuseId) ?? UITableViewCell(style: .subtitle, reuseIdentifier: songCellReuseId)
+        let cell = instantiateCell()
         let item = datasource[indexPath.row]
 
         cell.configure(with: item)
@@ -50,4 +48,7 @@ open class SongListViewController: UITableViewController {
         tableView.reloadData()
     }
 
+    open func instantiateCell() -> UITableViewCell {
+        return tableView.dequeueReusableCell(withIdentifier: songCellReuseId) ?? UITableViewCell(style: .subtitle, reuseIdentifier: songCellReuseId)
+    }
 }
