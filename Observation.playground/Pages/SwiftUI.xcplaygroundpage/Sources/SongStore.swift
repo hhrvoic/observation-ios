@@ -18,14 +18,13 @@ extension SongStore {
     }
 }
 
-// MARK: - Longer way: store without property wrapper (using objectWillChange publisher) -
+ //MARK: - Longer way: store without property wrapper (using objectWillChange publisher) -
 
 //public class SongStore: ObservableObject {
 //
 //    private init() {}
 //    public static let shared = SongStore()
 //
-//    public let objectWillChange = ObjectWillChangePublisher() // SwiftUI provides us with a default objectWillChange property, but it doesn’t work in the current beta so currently new one with the same name as in the protocol def. has to be created
 //    public var songs: [Song] = HardcodedSongs.ironMaiden
 //}
 //
@@ -35,3 +34,4 @@ extension SongStore {
 //        self.songs = songs
 //    }
 //}
+//

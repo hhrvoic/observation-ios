@@ -9,7 +9,6 @@ import PlaygroundSupport
 
 public class SongListViewControllerCO: SongListViewController {
     private let subject = Subject.shared
-    private var datasource: [Song] = HardcodedSongs.ironMaiden
 
     deinit {
         print("SongListViewController: released from VC stack")
